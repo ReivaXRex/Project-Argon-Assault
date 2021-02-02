@@ -65,3 +65,12 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Art Assets/
+Assets/Audio/
+Assets/Bakery/
+Assets/Gaia User Data/
+Assets/Enemies/
+bakery_times.log
+Assets/Bakery.meta
+Assets/Enemies.meta
+Assets/Gaia User Data.meta
