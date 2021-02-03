@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Awake()
+    void Awake()
     {
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Start()
+    void Start()
     {
         Invoke("LoadLevel", 2f);
     }

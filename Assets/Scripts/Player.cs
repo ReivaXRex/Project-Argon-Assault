@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
 
     [Tooltip("In metres")] [SerializeField]  float xRange = 6.7f;
     [Tooltip("In metres")] [SerializeField]  float yRange = 5f;
+   
+    [SerializeField] GameObject deathSFX;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen-Position based")]
     [SerializeField]  float positionPitchFactor = -5f;
@@ -23,18 +26,17 @@ public class Player : MonoBehaviour
     float xThrow, yThrow;
     bool isControlEnabled = true;
     
-    [SerializeField] GameObject deathSFX;
-
-    private void Update()
+    void Update()
     {
         if (isControlEnabled)
         {
             ProcessTranslation();
             ProcessRotation();
+            ProcessFiring();
         }
     }
 
-    private void ProcessTranslation()
+    void ProcessTranslation()
     {
         xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         yThrow = CrossPlatformInputManager.GetAxis("Vertical");
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
         transform.localPosition = new Vector3(xClampPos, yClampPos, transform.localPosition.z);
     }
 
-    private void ProcessRotation()
+    void ProcessRotation()
     {
         float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
         float pitchDueToThrowControl = yThrow * controlPitchFactor;
@@ -64,11 +66,34 @@ public class Player : MonoBehaviour
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 
-    private void OnPlayerDeath()
+    void OnPlayerDeath()
     {
         deathSFX.SetActive(true);
         isControlEnabled = false;
     }
 
-    
+    void ProcessFiring()
+    {
+
+        if (CrossPlatformInputManager.GetButton("Fire1"))
+        {
+            ActivateGuns(true);
+        }
+        else
+        {
+            ActivateGuns(false);
+        }
+    }
+
+    void ActivateGuns(bool isActive)
+    {
+        foreach (var gun in guns)
+        {
+            var emissionModule = gun.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = isActive;
+
+        }
+    }
+
+
 }

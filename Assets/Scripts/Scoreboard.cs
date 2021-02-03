@@ -7,7 +7,7 @@ public class Scoreboard : MonoBehaviour
     public Text scoreText;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         scoreText = GetComponent<Text>();
         scoreText.text = score.ToString();

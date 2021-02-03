@@ -2,14 +2,12 @@
 
 public class CollisionHandler : MonoBehaviour
 {
-    // [SerializeField] GameObject deathSFX;
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         StartDeathSequence();
     }
 
-    private void StartDeathSequence()
+    void StartDeathSequence()
     {
         // deathSFX.SetActive(true);
         SendMessage("OnPlayerDeath");
